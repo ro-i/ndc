@@ -1,0 +1,103 @@
+.TH NDC 1 "2020-03-22" "ndc manual page" "ndc manual page"
+
+
+.SH NAME
+ndc - numeric dump and conversion
+
+
+.SH SYNOPSIS
+.B ndc
+[\fIOPTION\fR]... [\fIFILE\fR]...
+
+
+.SH DESCRIPTION
+\fBndc\fR reads files and does a numeric dump (e.g. hex dump) or the reverse.
+.br
+If no filename is given, read standard input.
+.br
+If standard input is specified using one dash ("-"), process it like a normal filename.
+
+
+.SH OPTIONS
+.TP
+.B  -a
+show ascii representation of bytes in an additional column
+.TP
+.BI  -b " SIZE"
+read/write using bufsize of \fISIZE\fR bytes if read/write from/to a file
+.TP
+.BI  -d " FILE"
+write (append) to file \fIFILE\fR instead of stdout
+.TP
+.B  -f
+full output - do not replace consecutive identical lines with an asterisk
+.TP
+.B  -h
+show help
+.TP
+.B  -L
+show the limits of the numeric arguments
+.TP
+.B  -n
+no offset at the beginning of every line of output
+.TP
+.B  -r
+reverse mode: translate string representations of numeric
+values to bytes
+.br
+Tabs, spaces and newlines are silently skipped.
+.br
+requires \fB-t\fR option
+.TP
+.BI  -s " NUM"
+skip NUM bytes of every input file (or stdin)
+.TP
+.BI  -t " TYPE"
+set numeric system to \fITYPE\fR
+.br
+available types are:
+.br
+X (hexadecimal uppercase) (default)
+.br
+a (ASCII)
+.br
+b (binary)
+.br
+d (decimal)
+.br
+o (octal)
+.br
+x (hexadecimal lowercase)
+.TP
+.B  -v
+show version information
+.TP
+.BI  -w " WIDTH"
+display WIDTH bytes per line (arbitrary limit: 256)
+
+
+.SH NOTES
+Use \fB-L\fR to see the limits of the numeric arguments on your system.
+
+
+.SH EXAMPLES
+.TP
+.B ndc -tX -w16
+default output
+.TP
+.B ndc -a -tx -w16
+output style of hexdump
+
+
+.SH AUTHORS
+Written by Robert Imschweiler
+
+
+.SH COPYRIGHT
+Copyright (C) 2019-2020 Robert Imschweiler
+.br
+License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>
+.br
+This is free software; you are free to change and redistribute it.
+.br
+There is NO WARRANTY, to the extent permitted by law.

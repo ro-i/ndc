@@ -106,7 +106,6 @@ usage () {
 	printf '%s\n' "usage: $0 [OPTION]... TEST NDC_EXECUTABLE FILE..."
 	printf 'options available:
     --color          colored output (default)
-    --gdb            execute test using valgrind
     -h, --help       show this help
     --nocolor        no colored output
     --valgrind       execute test using valgrind
@@ -313,7 +312,6 @@ color=true
 current_test_name=""
 success=true
 valgrind_cmd="valgrind -q --leak-check=full --show-leak-kinds=all --errors-for-leak-kinds=all "
-gdb_cmd="gdb --args "
 debug_cmd=""
 
 if [ $# -le 2 ]; then
@@ -324,12 +322,6 @@ fi
 while [ -n "${1%%[^-]*}" ]; do
 	if [ "$1" = "--color" ]; then
 		color=true
-	elif [ "$1" = "--gdb" ]; then
-		if ! type gdb > /dev/null 2>&1; then
-			print_red "Could not find gdb."
-			exit 1
-		fi
-		debug_cmd="$gdb_cmd"
 	elif [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 		usage; exit 0
 	elif [ "$1" = "--nocolor" ]; then

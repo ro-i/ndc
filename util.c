@@ -89,12 +89,10 @@ verr(const char *format, va_list ap)
 	fputc('\n', stderr);
 }
 
+/* cf. https://graphics.stanford.edu/~seander/bithacks.html#DetermineIfPowerOf2 */
 bool
 is_power_of_two(uint_fast64_t n)
 {
-	return !n ? false :
-		n == 1 ? true :
-		n%2 ? false :
-		is_power_of_two(n/2);
+	return n && !(n & (n-1));
 }
 

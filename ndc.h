@@ -21,7 +21,6 @@
 #ifndef NDC_H
 #define NDC_H
 
-
 /*
  * length of offset representation in hex characters
  *   = number of bits in uint_fast64_t / 4
@@ -64,13 +63,13 @@ typedef struct {
 
 /* functions */
 char *append_ascii_col(char *out, const unsigned char *in, unsigned n);
-char * (*byte_to_numeric)(char *out, const unsigned char *in, unsigned n);
 void  get_offset(char *out, uint_fast64_t byte_count);
 
+/* function pointer */
+extern char * (*byte_to_numeric)(char *out, const unsigned char *in, unsigned n);
 
 /* variables */
 extern Params params;
 extern Repository type;
-
 
 #endif /* NDC_H */

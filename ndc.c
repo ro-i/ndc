@@ -74,6 +74,8 @@ Params params = {
 };
 /* define "type", declared in "ndc.h" */
 Repository type = no_repo;
+/* define "byte_to_numeric", declared in "ndc.h" */
+char * (*byte_to_numeric)(char *out, const unsigned char *in, unsigned n) = byte_to_numeric_power_of_two;
 
 
 /*
@@ -90,8 +92,9 @@ append_ascii_col(char *out, const unsigned char *in, unsigned n)
 	*out++ = '|';
 
 #if CHAR_BIT != 8
+	// TODO: is this the correct way to handle this?
 	while (n--)
-		*out++ = repo[ASC].characters[*in++%256];
+		*out++ = repo[ASC].characters[*in++ & 0xff];
 #else
 	while (n--)
 		*out++ = repo[ASC].characters[*in++];

@@ -20,8 +20,6 @@
 include config.mk
 
 bin = $(name_str)
-hdr = $(name_str).h config.h ligetopt_portable/libgetopt_portable.h \
-      repository.h repository_definition.h util.h DumpState.h
 src = $(name_str).c util.c libgetopt_portable/libgetopt_portable.c DumpState.c
 obj = ${src:.c=.o}
 files = COPYING README.md Makefile config.mk $(hdr) $(src) $(bin).1 test.sh \
@@ -52,11 +50,8 @@ profiling3: LDFLAGS += $(LDFLAGS_PROFILING)
 profiling3: CFLAGS = $(CFLAGS_PROFILING3)
 profiling3: $(bin)
 
-$(bin): $(obj)
-	$(CC) $(LDFLAGS) -o $(bin) $^
-
-%.o: %.c $(hdr)
-	$(CC) $(CFLAGS) -c -o $@ $<
+$(bin): $(src)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(bin) $^
 
 clean:
 	rm -f $(bin) $(obj) test
